@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Simplified SaaSyToad face mark, kept geometric so it stays legible at favicon sizes. Colors sampled from the final mascot art: olive-moss green + navy ink. -->
+  <rect width="256" height="256" rx="56" fill="#598A33"/>
+  <circle cx="92" cy="96" r="22" fill="#ffffff"/>
+  <circle cx="164" cy="96" r="22" fill="#ffffff"/>
+  <circle cx="96" cy="98" r="10" fill="#142548"/>
+  <circle cx="168" cy="98" r="10" fill="#142548"/>
+  <path d="M84 150 q44 40 88 0" fill="none" stroke="#142548" stroke-width="12" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Maskable icon: full-bleed olive-moss green, simplified face inside the safe zone. Colors sampled from the final mascot art. -->
+  <rect width="256" height="256" fill="#598A33"/>
+  <circle cx="100" cy="104" r="20" fill="#ffffff"/>
+  <circle cx="156" cy="104" r="20" fill="#ffffff"/>
+  <circle cx="104" cy="106" r="9" fill="#142548"/>
+  <circle cx="160" cy="106" r="9" fill="#142548"/>
+  <path d="M98 148 q30 30 60 0" fill="none" stroke="#142548" stroke-width="11" stroke-linecap="round"/>
+</svg>

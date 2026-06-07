@@ -1,0 +1,553 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------- */
+/*  SaaSyToadCRM — design tokens                                     */
+/*  Apple-inspired: restrained palette, careful typography, subtle   */
+/*  surfaces and depth. Light and dark rendered with equal care.     */
+/* ---------------------------------------------------------------- */
+
+@theme {
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "SF Pro Display", "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "SF Mono", ui-monospace, Menlo,
+    Consolas, monospace;
+
+  /* Radius scale */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --background: oklch(0.99 0 0);
+  --surface: oklch(1 0 0);
+  --surface-elevated: oklch(1 0 0);
+  --surface-muted: oklch(0.97 0.002 240);
+  --surface-hover: oklch(0.955 0.003 240);
+
+  /* Text */
+  --foreground: oklch(0.18 0.005 264);
+  --foreground-muted: oklch(0.46 0.008 264);
+  --foreground-subtle: oklch(0.6 0.006 264);
+
+  /* Borders */
+  --border: oklch(0.92 0.003 264);
+  --border-strong: oklch(0.86 0.005 264);
+  --ring: var(--toad-green);
+
+  /* Brand — sampled from the final SaaSyToad mascot art: an olive-moss toad
+     (hue ~134), a deep navy ring (hue ~264), and a brass-gold wordmark (hue
+     ~74). Defined once here; everything else points at these. Keep --toad-green
+     in sync with BRAND_ACCENT in src/lib/brand.ts, which feeds the embed
+     surfaces (forms, chat widget) that can't reach these CSS tokens. */
+  --toad-green: oklch(0.58 0.13 134);
+  --toad-green-hover: oklch(0.51 0.13 134);
+  --toad-ink: oklch(0.27 0.07 264);
+  --toad-accent: oklch(0.75 0.13 74);
+  --primary: var(--toad-green);
+  --primary-hover: var(--toad-green-hover);
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* Semantic */
+  --success: oklch(0.66 0.16 152);
+  --warning: oklch(0.78 0.16 78);
+  --danger: oklch(0.62 0.22 25);
+  --danger-hover: oklch(0.56 0.22 25);
+  --danger-foreground: oklch(0.99 0 0);
+
+  /* Stage colors for kanban (light) */
+  --stage-1: oklch(0.62 0.18 252);
+  --stage-2: oklch(0.68 0.16 200);
+  --stage-3: oklch(0.7 0.18 142);
+  --stage-4: oklch(0.78 0.16 78);
+  --stage-5: oklch(0.62 0.22 25);
+  --stage-6: oklch(0.55 0.18 300);
+
+  /* Shadows — subtle, never harsh */
+  --shadow-xs: 0 1px 2px 0 oklch(0.18 0.005 264 / 0.04);
+  --shadow-sm: 0 1px 3px 0 oklch(0.18 0.005 264 / 0.06),
+    0 1px 2px -1px oklch(0.18 0.005 264 / 0.04);
+  --shadow-md: 0 4px 6px -1px oklch(0.18 0.005 264 / 0.07),
+    0 2px 4px -2px oklch(0.18 0.005 264 / 0.05);
+  --shadow-lg: 0 10px 20px -3px oklch(0.18 0.005 264 / 0.08),
+    0 4px 8px -4px oklch(0.18 0.005 264 / 0.06);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: oklch(0.16 0.005 264);
+  --surface: oklch(0.2 0.006 264);
+  --surface-elevated: oklch(0.23 0.007 264);
+  --surface-muted: oklch(0.22 0.005 264);
+  --surface-hover: oklch(0.255 0.007 264);
+
+  --foreground: oklch(0.97 0.003 264);
+  --foreground-muted: oklch(0.7 0.006 264);
+  --foreground-subtle: oklch(0.55 0.006 264);
+
+  --border: oklch(0.3 0.006 264);
+  --border-strong: oklch(0.38 0.008 264);
+  --ring: var(--toad-green);
+
+  /* Brand — olive-moss toad green, lifted for dark surfaces; ink flips to a
+     navy-tinted near-white so brand text stays legible on dark. */
+  --toad-green: oklch(0.72 0.13 134);
+  --toad-green-hover: oklch(0.78 0.12 134);
+  --toad-ink: oklch(0.93 0.03 264);
+  --toad-accent: oklch(0.8 0.13 74);
+  --primary: var(--toad-green);
+  --primary-hover: var(--toad-green-hover);
+  --primary-foreground: oklch(0.18 0.005 264);
+
+  --success: oklch(0.72 0.16 152);
+  --warning: oklch(0.82 0.16 78);
+  --danger: oklch(0.68 0.22 25);
+  --danger-hover: oklch(0.74 0.2 25);
+  --danger-foreground: oklch(0.99 0 0);
+
+  --stage-1: oklch(0.7 0.18 252);
+  --stage-2: oklch(0.74 0.16 200);
+  --stage-3: oklch(0.76 0.18 142);
+  --stage-4: oklch(0.82 0.16 78);
+  --stage-5: oklch(0.68 0.22 25);
+  --stage-6: oklch(0.62 0.18 300);
+
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.4);
+  --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.5),
+    0 1px 2px -1px oklch(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px oklch(0 0 0 / 0.55),
+    0 2px 4px -2px oklch(0 0 0 / 0.45);
+  --shadow-lg: 0 10px 20px -3px oklch(0 0 0 / 0.65),
+    0 4px 8px -4px oklch(0 0 0 / 0.5);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-hover: var(--surface-hover);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-toad-green: var(--toad-green);
+  --color-toad-green-hover: var(--toad-green-hover);
+  --color-toad-ink: var(--toad-ink);
+  --color-toad-accent: var(--toad-accent);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-stage-1: var(--stage-1);
+  --color-stage-2: var(--stage-2);
+  --color-stage-3: var(--stage-3);
+  --color-stage-4: var(--stage-4);
+  --color-stage-5: var(--stage-5);
+  --color-stage-6: var(--stage-6);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  letter-spacing: -0.011em;
+}
+
+/* Focus ring — always visible for keyboard, never on click */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Selection */
+::selection {
+  background: color-mix(in oklch, var(--primary) 25%, transparent);
+  color: var(--foreground);
+}
+
+/* Scrollbar — subtle, only visible when needed */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, var(--foreground-subtle) 30%, transparent);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklch, var(--foreground-subtle) 50%, transparent);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@utility animate-in-fade {
+  animation: fadeIn 180ms var(--ease-out-soft);
+}
+@utility animate-in-slide-up {
+  animation: slideUpFade 220ms var(--ease-out-soft);
+}
+@utility animate-in-scale {
+  animation: scaleIn 180ms var(--ease-out-soft);
+}
+
+/* Glass surfaces — Apple-style translucent panels */
+@utility glass {
+  background: color-mix(in oklch, var(--surface) 70%, transparent);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+@utility glass-strong {
+  background: color-mix(in oklch, var(--surface) 85%, transparent);
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+}
+
+/* Skeleton loader */
+@utility skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-muted) 0%,
+    var(--surface-hover) 50%,
+    var(--surface-muted) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* Faint blueprint / circuit grid for futuristic marketing backdrops. Pair
+   with a radial mask so it fades toward the edges. */
+@utility circuit-grid {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklch, var(--toad-ink) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklch, var(--toad-ink) 7%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 40px 40px;
+}
+
+/* ================================================================ */
+/*  STEAMPUNK MARKETING THEME — scoped to .steampunk only            */
+/*  "Brass-and-circuitry atelier": Victorian-industrial workshop     */
+/*  meets a modern AI studio. Aged brass + copper + bronze on a deep */
+/*  oxidized-iron base, warm gaslight glow, fine engraved filigree.  */
+/*                                                                    */
+/*  HOW THE SCOPING WORKS: the existing @theme inline maps every     */
+/*  --color-* utility to a var() that resolves at the use site. By   */
+/*  redefining those same custom properties inside .steampunk, every */
+/*  existing utility (bg-surface, text-foreground, border-border,    */
+/*  bg-toad-green, the Card + buttonVariants primitives) re-skins for */
+/*  free for anything rendered inside the marketing layout. Nothing  */
+/*  here touches :root or .dark, so the app stays identical.         */
+/* ================================================================ */
+
+.steampunk {
+  color-scheme: dark;
+
+  /* --- Raw steampunk palette (the source colors) --- */
+  /* Iron: very dark desaturated teal-charcoal base. */
+  --sp-iron: oklch(0.17 0.018 220);
+  --sp-iron-deep: oklch(0.13 0.016 220);
+  /* Metal: lifted plate surfaces above the iron base. */
+  --sp-metal: oklch(0.225 0.018 218);
+  --sp-metal-2: oklch(0.265 0.02 216);
+  /* Brass: warm gold accent, built around the brand brass hue (~74). */
+  --sp-brass: oklch(0.78 0.13 78);
+  --sp-brass-bright: oklch(0.86 0.13 84);
+  --sp-brass-antique: oklch(0.62 0.1 70);
+  --sp-copper: oklch(0.66 0.13 48);
+  /* Patina: the brand moss green (~134) as a verdigris accent. */
+  --sp-patina: oklch(0.72 0.12 150);
+  --sp-patina-deep: oklch(0.55 0.1 150);
+  /* Amber gaslight glow for halos + focus. */
+  --sp-amber: oklch(0.82 0.15 70);
+  /* Parchment / cream for primary text + contrast cards. */
+  --sp-parchment: oklch(0.95 0.022 84);
+  --sp-parchment-warm: oklch(0.9 0.03 80);
+
+  /* --- Re-skin the shared app tokens (used by Card, buttons, etc.) --- */
+  --background: var(--sp-iron);
+  --surface: var(--sp-metal);
+  --surface-elevated: var(--sp-metal-2);
+  --surface-muted: oklch(0.2 0.018 219);
+  --surface-hover: var(--sp-metal-2);
+
+  --foreground: var(--sp-parchment);
+  /* Brass-tinted muted gray; >= 4.5:1 on the iron base for body text. */
+  --foreground-muted: oklch(0.76 0.022 82);
+  --foreground-subtle: oklch(0.62 0.02 82);
+
+  /* Brass hairlines instead of cool gray borders. */
+  --border: oklch(0.42 0.05 76 / 0.55);
+  --border-strong: oklch(0.55 0.08 78 / 0.7);
+  --ring: var(--sp-amber);
+
+  /* Brand hooks: primary becomes brass; toad-green stays the patina accent. */
+  --toad-green: var(--sp-patina);
+  --toad-green-hover: oklch(0.78 0.12 150);
+  --toad-ink: var(--sp-parchment);
+  --toad-accent: var(--sp-brass);
+  --primary: var(--sp-brass);
+  --primary-hover: var(--sp-brass-bright);
+  /* Dark ink on the brass fill keeps button labels AA-legible. */
+  --primary-foreground: oklch(0.2 0.02 60);
+
+  --success: var(--sp-patina);
+  --warning: var(--sp-brass-bright);
+
+  /* Deep, warm shadows so plates read as machined metal, not paper. */
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.5);
+  --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.6), 0 1px 2px -1px oklch(0 0 0 / 0.5);
+  --shadow-md: 0 6px 16px -4px oklch(0 0 0 / 0.6),
+    0 2px 6px -2px oklch(0 0 0 / 0.5);
+  --shadow-lg: 0 18px 40px -8px oklch(0 0 0 / 0.7),
+    0 6px 14px -6px oklch(0 0 0 / 0.55);
+
+  background-color: var(--sp-iron);
+  color: var(--foreground);
+
+  /* Page-level atmosphere: a faint warm vignette + a brushed-metal grain so
+     the base never reads as flat black. Kept very low so text stays crisp. */
+  position: relative;
+}
+
+.steampunk::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      120% 80% at 50% -10%,
+      oklch(0.3 0.04 70 / 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      90% 70% at 100% 100%,
+      oklch(0.22 0.03 200 / 0.4),
+      transparent 55%
+    );
+}
+
+/* Engraved-brass display heading face, applied ONLY inside .steampunk so the
+   app keeps Geist everywhere. The variable is wired by the marketing layout. */
+.steampunk .font-display,
+.steampunk h1,
+.steampunk h2,
+.steampunk h3 {
+  font-family: var(--font-display), var(--font-sans);
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+/* Small all-caps engraved label for eyebrows + section kickers. */
+@utility engraved-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sp-brass);
+  text-shadow: 0 1px 0 oklch(0 0 0 / 0.5);
+}
+
+/* Machined brass plate: a hairline brass border, a lighter top edge (inner
+   highlight) and a soft inner shadow for depth. Reads like cut metal. */
+@utility brass-panel {
+  position: relative;
+  background:
+    linear-gradient(
+      180deg,
+      oklch(0.27 0.02 216) 0%,
+      oklch(0.21 0.018 219) 100%
+    );
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    inset 0 1px 0 0 oklch(0.85 0.1 82 / 0.18),
+    inset 0 0 0 1px oklch(0 0 0 / 0.25),
+    var(--shadow-md);
+}
+
+/* Parchment contrast card: a warm aged-paper surface for the occasional light
+   panel against the dark metal. Text on it flips to dark ink. */
+@utility parchment-panel {
+  background:
+    linear-gradient(
+      180deg,
+      oklch(0.95 0.025 86) 0%,
+      oklch(0.9 0.03 82) 100%
+    );
+  color: oklch(0.28 0.03 60);
+  border: 1px solid oklch(0.55 0.08 78 / 0.6);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.5),
+    var(--shadow-md);
+}
+
+/* Brass gear-ring frame for the toad portraits: concentric brass rings with a
+   warm glow, so each character sits inside a machined bezel. */
+@utility gear-ring {
+  position: relative;
+  border-radius: 9999px;
+  padding: 0.5rem;
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      oklch(0.32 0.03 200 / 0.6),
+      oklch(0.16 0.018 219) 72%
+    );
+  box-shadow:
+    0 0 0 1px oklch(0 0 0 / 0.5),
+    0 0 0 4px oklch(0.5 0.09 78 / 0.55),
+    0 0 0 5px oklch(0.78 0.12 82 / 0.35),
+    inset 0 2px 6px oklch(0 0 0 / 0.6),
+    0 16px 40px oklch(0 0 0 / 0.55);
+}
+
+/* Riveted corners: four small metallic studs at a panel's corners. Apply to a
+   `position: relative` element. Purely decorative. */
+@utility riveted {
+  position: relative;
+}
+.riveted::before,
+.riveted::after,
+.riveted > .rivet-b,
+.riveted > .rivet-c {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 35% 30%,
+    var(--sp-brass-bright),
+    var(--sp-brass-antique) 60%,
+    oklch(0.3 0.03 60) 100%
+  );
+  box-shadow: 0 0 0 1px oklch(0 0 0 / 0.4), 0 1px 1px oklch(0 0 0 / 0.5);
+}
+.riveted::before { top: 9px; left: 9px; }
+.riveted::after { top: 9px; right: 9px; }
+.riveted > .rivet-b { bottom: 9px; left: 9px; }
+.riveted > .rivet-c { bottom: 9px; right: 9px; }
+
+/* Brushed-metal grain overlay for panels. Pair on a `position: relative`
+   element with `overflow: hidden`; sits under content via -z. */
+@utility metal-grain {
+  position: relative;
+}
+.metal-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("/textures/brushed-metal.svg");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+}
+
+/* Brass focus ring inside the steampunk scope. */
+.steampunk :focus-visible {
+  outline: 2px solid var(--sp-amber);
+  outline-offset: 2px;
+}
+
+/* Slow decorative rotation for hero cogs. */
+@keyframes sp-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes sp-rotate-rev {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+.sp-spin {
+  animation: sp-rotate 40s linear infinite;
+  transform-origin: 50% 50%;
+}
+.sp-spin-rev {
+  animation: sp-rotate-rev 56s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+/* All decorative motion off when the visitor asks for less. */
+@media (prefers-reduced-motion: reduce) {
+  .sp-spin,
+  .sp-spin-rev {
+    animation: none;
+  }
+}
+
+/* Print: hide app chrome */
+@media print {
+  .no-print { display: none !important; }
+}
