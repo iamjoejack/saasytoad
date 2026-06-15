@@ -12,7 +12,7 @@ import {
   Globe,
   Lock,
 } from "lucide-react";
-import { BOOK_A_DEMO_URL, FORGE_LOGIN_URL } from "@/lib/brand";
+import { BOOK_A_DEMO_URL, FORGE_LOGIN_URL, FORGE_URL } from "@/lib/brand";
 import { buttonVariants } from "@/components/ui/button";
 import { AppPreview } from "@/components/mock/app-preview";
 import { cn } from "@/lib/utils";
@@ -38,10 +38,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ForgeLandingPage() {
+/** Launch status comes from the Forge app's product config, set by the owner in the back office. */
+const STATUS_BADGE: Record<string, string> = {
+  "coming-soon": "Coming soon / in development",
+  "early-access": "Early access",
+  live: "Now live",
+};
+
+async function getForgeStatus(): Promise<string> {
+  try {
+    const res = await fetch(`${FORGE_URL}/api/product-status`, {
+      next: { revalidate: 300 },
+    });
+    if (!res.ok) return "coming-soon";
+    const data = (await res.json()) as { status?: string };
+    return data.status ?? "coming-soon";
+  } catch {
+    return "coming-soon";
+  }
+}
+
+export default async function ForgeLandingPage() {
+  const status = await getForgeStatus();
   return (
     <>
-      <Hero />
+      <Hero status={status} />
       <HonestPricing />
       <Features />
       <PricingSection />
@@ -54,7 +75,8 @@ export default function ForgeLandingPage() {
 /*  Hero                                                               */
 /* ------------------------------------------------------------------ */
 
-function Hero() {
+function Hero({ status }: { status: string }) {
+  const badge = STATUS_BADGE[status] ?? STATUS_BADGE["coming-soon"];
   return (
     <section className="relative overflow-hidden">
       <HeroBackdrop />
@@ -62,7 +84,7 @@ function Hero() {
         <div className="mx-auto max-w-3xl text-center">
           <span className="engraved-label justify-center rounded-full border border-(--border-strong) bg-(--surface)/60 px-3.5 py-1.5 backdrop-blur text-(--sp-amber)">
             <span className="size-1.5 rounded-full bg-(--sp-amber) shadow-[0_0_8px_var(--sp-amber)] animate-pulse" />
-            Coming soon / In Development
+            {badge}
           </span>
 
           <h1 className="mt-7 text-balance text-4xl font-semibold leading-[1.05] text-foreground sm:text-5xl md:text-6xl">
@@ -92,14 +114,29 @@ function Hero() {
           </div>
 
           <p className="mt-6 text-sm text-foreground-subtle">
-            Get early access to the sandbox. Meet Ronald on a live call, or{" "}
-            <a
-              href={FORGE_LOGIN_URL}
-              className="text-(--sp-amber) underline-offset-2 hover:underline"
-            >
-              sign in if you already have access
-            </a>
-            .
+            {status === "live" ? (
+              <>
+                Forge is live.{" "}
+                <a
+                  href={FORGE_LOGIN_URL}
+                  className="text-(--sp-amber) underline-offset-2 hover:underline"
+                >
+                  Sign in to start building
+                </a>
+                .
+              </>
+            ) : (
+              <>
+                Get early access to the sandbox. Meet Ronald on a live call, or{" "}
+                <a
+                  href={FORGE_LOGIN_URL}
+                  className="text-(--sp-amber) underline-offset-2 hover:underline"
+                >
+                  sign in if you already have access
+                </a>
+                .
+              </>
+            )}
           </p>
         </div>
 
