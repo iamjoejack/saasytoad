@@ -20,6 +20,13 @@ import {
   Play,
   Zap,
   Check,
+  Folder,
+  Terminal,
+  Settings,
+  FileCode,
+  Send,
+  Plus,
+  ArrowRight,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -640,13 +647,348 @@ export function WorkflowScreen() {
   );
 }
 
+/* ---------- 7. Forge Editor Screen ---------- */
+
+export function ForgeEditorScreen() {
+  return (
+    <div className="grid h-[820px] grid-rows-[auto_1fr] bg-[#0c0c0e] text-zinc-200 font-sans select-none text-left">
+      {/* IDE Topbar */}
+      <header className="flex items-center gap-3 border-b border-white/5 px-4 py-3 bg-[#0f0f12] h-14">
+        <div className="flex items-center gap-2">
+          <span className="text-xl">🐸</span>
+          <span className="text-sm font-semibold tracking-tight text-white font-cinzel">Forge</span>
+        </div>
+        <span className="text-zinc-700">/</span>
+        <span className="text-xs text-zinc-400">workspaces</span>
+        <span className="text-zinc-700">/</span>
+        <span className="font-mono text-[10px] text-[var(--sp-brass-bright)]">toad-forge-sandbox</span>
+        <span className="text-zinc-800 font-light mx-1">|</span>
+        <div className="flex items-center gap-1">
+          {['File', 'Edit', 'Selection', 'View', 'Go', 'Run', 'Terminal', 'Help'].map((item) => (
+            <span key={item} className="px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-zinc-400 hover:text-zinc-200">
+              {item}
+            </span>
+          ))}
+        </div>
+        <span className="ml-auto text-[10px] font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-1 border border-white/5 px-2 py-0.5 rounded bg-white/[0.02]">
+          ⚙️ Steampunk UI
+        </span>
+        <span className="text-zinc-850">|</span>
+        <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#b5a642] text-black">
+          🚀 Deploy App
+        </span>
+        <span className="text-zinc-850">|</span>
+        <span className="text-xs text-zinc-400">settings</span>
+        <span className="inline-flex items-center gap-1.5 text-xs text-emerald-500">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          sandbox live
+        </span>
+      </header>
+
+      {/* Main Grid */}
+      <div className="grid min-h-0 grid-cols-[240px_1fr_360px] h-[764px]">
+        {/* Left Sidebar: File Tree */}
+        <aside className="border-r border-white/5 bg-[#0c0c0e] flex flex-col p-4 space-y-4">
+          <div className="flex border-b border-white/5 pb-2 text-xs font-semibold text-white uppercase tracking-wider">
+            📁 Files
+          </div>
+          <div className="space-y-2 text-xs text-zinc-400">
+            <div className="flex items-center gap-2 text-zinc-200 bg-white/[0.04] p-1 rounded border border-white/5">
+              <FileCode className="size-4 text-[#b5a642]" />
+              <span className="font-mono">src/App.tsx</span>
+            </div>
+            <div className="flex items-center gap-2 p-1 pl-4">
+              <FileCode className="size-4" />
+              <span className="font-mono text-zinc-500">src/index.css</span>
+            </div>
+            <div className="flex items-center gap-2 p-1 pl-4">
+              <Folder className="size-4 text-zinc-650" />
+              <span className="font-mono text-zinc-500">public/</span>
+            </div>
+            <div className="flex items-center gap-2 p-1">
+              <FileCode className="size-4" />
+              <span className="font-mono text-zinc-500">package.json</span>
+            </div>
+            <div className="flex items-center gap-2 p-1">
+              <FileCode className="size-4" />
+              <span className="font-mono text-zinc-500">vite.config.ts</span>
+            </div>
+          </div>
+          <div className="pt-4 border-t border-white/5">
+            <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">Sandboxes</span>
+            <div className="mt-2 p-2 bg-black/40 rounded border border-white/5 text-[11px]">
+              <div className="text-zinc-400">Compute usage: 12%</div>
+              <div className="w-full bg-zinc-800 h-1.5 rounded mt-1 overflow-hidden">
+                <div className="bg-[#b5a642] h-full w-[12%]" />
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        {/* Center: Editor + Console */}
+        <section className="grid grid-rows-[1fr_220px] bg-[#0d0d0f] border-r border-white/5 min-h-0">
+          {/* Monaco Editor Pane */}
+          <div className="p-6 font-mono text-xs text-zinc-300 relative overflow-hidden flex flex-col min-h-0">
+            <div className="flex items-center gap-2 border-b border-white/5 pb-2 mb-4">
+              <span className="text-[#b5a642] border-b border-[#b5a642] pb-2 -mb-2 font-sans font-semibold">src/App.tsx</span>
+            </div>
+            <div className="flex-1 space-y-1 text-zinc-400 overflow-y-auto">
+              <div><span className="text-indigo-400">import</span> React, &#123; useState &#125; <span className="text-indigo-400">from</span> <span className="text-emerald-400">&apos;react&apos;</span>;</div>
+              <div><span className="text-indigo-400">import</span> &#123; Sparkles, Bot &#125; <span className="text-indigo-400">from</span> <span className="text-emerald-400">&apos;lucide-react&apos;</span>;</div>
+              <div className="text-zinc-700">// Complete development workspace loaded in E2B Container</div>
+              <div><span className="text-indigo-400">export default function</span> <span className="text-amber-400">App</span>() &#123;</div>
+              <div className="pl-4">const [count, setCount] = <span className="text-amber-400">useState</span>(<span className="text-orange-400">0</span>);</div>
+              <div className="pl-4"><span className="text-indigo-400">return</span> (</div>
+              <div className="pl-8 text-zinc-350">&lt;<span className="text-cyan-400">div</span> <span className="text-yellow-400">className</span>=<span className="text-emerald-400">&quot;flex flex-col min-h-screen bg-neutral-950&quot;</span>&gt;</div>
+              <div className="pl-12 text-zinc-350">&lt;<span className="text-cyan-400">header</span> <span className="text-yellow-400">className</span>=<span className="text-emerald-400">&quot;border-b border-white/10 p-4&quot;</span>&gt;</div>
+              <div className="pl-16 text-zinc-350">&lt;<span className="text-cyan-400">h1</span> <span className="text-yellow-400">className</span>=<span className="text-emerald-400">&quot;text-white font-bold&quot;</span>&gt;My Awesome Website&lt;/<span className="text-cyan-400">h1</span>&gt;</div>
+              <div className="pl-12 text-zinc-350">&lt;/<span className="text-cyan-400">header</span>&gt;</div>
+              <div className="pl-8 text-zinc-350">&lt;/<span className="text-cyan-400">div</span>&gt;</div>
+              <div className="pl-4">);</div>
+              <div>&#125;</div>
+            </div>
+            <div className="absolute right-4 bottom-4 p-2 bg-black/80 rounded border border-white/5 text-[10px] text-zinc-550">
+              UTF-8 · TSX · Monaco Editor
+            </div>
+          </div>
+
+          {/* Bottom Terminal Console */}
+          <div className="border-t border-white/5 bg-[#08080a] p-4 flex flex-col justify-between font-mono text-[11px] h-[220px]">
+            <div className="flex items-center justify-between border-b border-white/5 pb-1 mb-2 text-zinc-650 font-sans">
+              <span className="flex items-center gap-1.5"><Terminal className="size-3.5" /> Terminal Logs</span>
+              <span>12:30:15</span>
+            </div>
+            <div className="flex-1 space-y-1 text-emerald-400">
+              <div>vite v5.2.11 dev server running...</div>
+              <div>➜  Local:   <span className="underline">http://localhost:5173/</span></div>
+              <div className="text-zinc-500">[vite] hot module replacement enabled</div>
+              <div className="text-zinc-500">[vite] watching for file changes in src/App.tsx</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Right: Agent Panel */}
+        <aside className="bg-[#0b0b0d] flex flex-col p-4 justify-between min-h-0">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 border-b border-white/5 pb-2">
+              <span className="text-lg">🐸</span>
+              <div>
+                <div className="text-xs font-semibold text-white">Ask Ronald</div>
+                <div className="text-[10px] text-zinc-500 font-mono">Agent Coder · Active</div>
+              </div>
+              <span className="ml-auto inline-flex size-2 rounded-full bg-emerald-500 animate-pulse" />
+            </div>
+
+            {/* Chat Messages */}
+            <div className="space-y-3 text-[12px] overflow-y-auto max-h-[500px]">
+              <div className="p-3 bg-zinc-900/40 rounded-lg border border-white/5 space-y-1">
+                <span className="font-semibold text-zinc-300">User</span>
+                <p className="text-zinc-400">Add a dark mode toggle button to the header navbar</p>
+              </div>
+
+              <div className="p-3 bg-white/[0.02] rounded-lg border border-white/10 space-y-2">
+                <div className="flex items-center gap-1.5 font-semibold text-zinc-200">
+                  <Bot className="size-3.5" />
+                  <span>Ronald</span>
+                </div>
+                <p className="text-zinc-350 leading-relaxed">I have analyzed <span className="font-mono text-[11px] text-zinc-200">src/App.tsx</span>. Adding a React state variable for theme toggling, rendering the sun/moon button elements, and configuring dark utility classes. File compiled successfully!</p>
+                <div className="text-[10px] text-zinc-500 font-mono">✓ App.tsx modified (+18, -4 lines)</div>
+              </div>
+            </div>
+          </div>
+
+          {/* User Input Slot */}
+          <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/40 px-3 py-2 mt-auto">
+            <input type="text" placeholder="Type instruction to build app..." disabled className="bg-transparent flex-1 text-xs outline-none text-zinc-500" />
+            <Send className="size-3.5 text-zinc-650" />
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- 8. Forge Deploy Screen ---------- */
+
+export function ForgeDeployScreen() {
+  return (
+    <div className="grid h-[820px] grid-rows-[auto_1fr] bg-[#0c0c0e] text-zinc-200 font-sans select-none text-left relative">
+      {/* IDE Topbar */}
+      <header className="flex items-center gap-3 border-b border-white/5 px-4 py-3 bg-[#0f0f12] h-14 opacity-40 pointer-events-none">
+        <div className="flex items-center gap-2">
+          <span className="text-xl">🐸</span>
+          <span className="text-sm font-semibold tracking-tight text-white font-cinzel">Forge</span>
+        </div>
+        <span className="text-zinc-700">/</span>
+        <span className="text-xs text-zinc-400">workspaces</span>
+        <span className="text-zinc-850">|</span>
+        <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-zinc-800 text-[var(--sp-brass-bright)] animate-pulse">
+          Deploying...
+        </span>
+      </header>
+
+      {/* Main Grid Blur Layout */}
+      <div className="grid min-h-0 grid-cols-[240px_1fr_360px] h-[764px] opacity-30 pointer-events-none">
+        <aside className="border-r border-white/5 bg-[#0c0c0e] flex flex-col p-4 space-y-4" />
+        <section className="grid grid-rows-[1fr_220px] bg-[#0d0d0f] border-r border-white/5" />
+        <aside className="bg-[#0b0b0d] flex flex-col p-4" />
+      </div>
+
+      {/* Deploy Modal Overlaid in center */}
+      <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-xs select-none">
+        <div className="w-full max-w-lg rounded-xl border border-white/10 bg-[#0e0e12] p-6 shadow-2xl space-y-5">
+          <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+            <h3 className="font-cinzel text-xs font-bold text-zinc-200 tracking-wider">
+              Deployment Build Pipeline Logs
+            </h3>
+            <span className="text-[10px] uppercase font-bold text-emerald-500 flex items-center gap-1.5">
+              <span className="size-2 rounded-full bg-emerald-500 animate-ping" />
+              Active
+            </span>
+          </div>
+
+          <pre className="rounded bg-black p-4 font-mono text-[10.5px] text-emerald-400 overflow-auto max-h-[280px] border border-white/5 whitespace-pre-wrap leading-relaxed">
+            [1/4] 📦 Resolving production package bundles...{"\n"}
+            [2/4] 🔧 Running compilation check (&apos;npm run build&apos;)...{"\n"}
+            ✓ Vite static bundle generated successfully (128KB, assets/index-B912cf.js){"\n"}
+            [3/4] 🚀 Deploying bundle to edge container VM...{"\n"}
+            ✓ Virtual microVM booted on edge node (21ms){"\n"}
+            [4/4] 🌐 Mapping DNS to CDN edge router...{"\n"}
+            ✓ Public edge deployment success!
+          </pre>
+
+          {/* Success Banner */}
+          <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl space-y-2">
+            <div className="flex items-center gap-2 text-emerald-400">
+              <Check className="size-4 shrink-0" />
+              <span className="text-xs font-bold uppercase tracking-wider">Application Live on CDN</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs">
+              <span className="text-zinc-400 font-mono">Url:</span>
+              <a href="#" className="underline font-bold text-white hover:text-white">https://toad-forge-sandbox.sh/quick-crm-demo</a>
+            </div>
+          </div>
+
+          <div className="flex justify-end pt-1 gap-2">
+            <button className="rounded bg-zinc-800 border border-zinc-700 px-4 py-1.5 text-xs font-semibold text-zinc-200">
+              Close Logs
+            </button>
+            <button className="rounded bg-[#b5a642] text-black px-4 py-1.5 text-xs font-bold">
+              Open App Live
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- 9. Forge Zapier Screen ---------- */
+
+export function ForgeZapierScreen() {
+  return (
+    <div className="grid h-[820px] grid-rows-[auto_1fr] bg-[#0c0c0e] text-zinc-200 font-sans select-none text-left">
+      {/* IDE Topbar */}
+      <header className="flex items-center gap-3 border-b border-white/5 px-4 py-3 bg-[#0f0f12] h-14">
+        <div className="flex items-center gap-2">
+          <span className="text-xl">🐸</span>
+          <span className="text-sm font-semibold tracking-tight text-white font-cinzel">Forge</span>
+        </div>
+        <span className="text-zinc-700">/</span>
+        <span className="text-xs text-zinc-400">workspaces</span>
+        <span className="text-zinc-750">|</span>
+        <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border border-white/10 bg-white/[0.02]">
+          🚀 Deploy App
+        </span>
+      </header>
+
+      {/* Main Grid */}
+      <div className="grid min-h-0 grid-cols-[240px_1fr_360px] h-[764px]">
+        {/* Left Sidebar */}
+        <aside className="border-r border-white/5 bg-[#0c0c0e] flex flex-col p-4 space-y-4">
+          <div className="flex border-b border-white/5 pb-2 text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+            📁 Files
+          </div>
+          <div className="space-y-2 text-xs text-zinc-500">
+            <div className="flex items-center gap-2">
+              <FileCode className="size-4" />
+              <span className="font-mono">src/App.tsx</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <FileCode className="size-4" />
+              <span className="font-mono">package.json</span>
+            </div>
+          </div>
+        </aside>
+
+        {/* Center */}
+        <section className="bg-[#0d0d0f] p-6 border-r border-white/5">
+          <h2 className="text-lg font-semibold font-cinzel text-white mb-2">Zapier Webhook Automations</h2>
+          <p className="text-xs text-zinc-500 leading-relaxed mb-6">You can configure automated workflows. Every action or form submission in your sandboxed application can trigger a webhook payload sent directly to Zapier to interact with 8,000+ API connections.</p>
+
+          <div className="space-y-4 max-w-lg">
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">1. Configure Active Trigger Webhook Url</label>
+              <div className="flex items-center gap-2">
+                <input type="text" readOnly value="https://hooks.zapier.com/hooks/catch/98765/zpy-forge" className="bg-black/60 border border-white/10 rounded-lg p-2 text-xs font-mono flex-1 text-zinc-300 outline-none" />
+                <Badge variant="outline" className="border-emerald-500/35 text-emerald-400">Active</Badge>
+              </div>
+            </div>
+
+            <div className="space-y-1.5 pt-3">
+              <label className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">2. Test Webhook Connection</label>
+              <div className="p-3.5 bg-black/40 rounded-xl border border-white/5 font-mono text-[11px] text-zinc-550 space-y-1.5">
+                <div className="text-zinc-650">// JSON payload sent to trigger Zapier node:</div>
+                <div>&#123;</div>
+                <div className="pl-4">&quot;event&quot;: &quot;forge_lead_enriched&quot;,</div>
+                <div className="pl-4">&quot;lead&quot;: &#123;</div>
+                <div className="pl-8">&quot;name&quot;: &quot;Marcus Bell&quot;,</div>
+                <div className="pl-8">&quot;email&quot;: &quot;marcus@bellroofs.com&quot;</div>
+                <div className="pl-4">&#125;</div>
+                <div>&#125;</div>
+              </div>
+            </div>
+
+            <div className="pt-3">
+              <button className="px-4 py-2 bg-[#b5a642] text-black rounded text-xs font-bold">
+                Trigger Test Webhook Payload
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Right Pane: Zapier Logs */}
+        <aside className="bg-[#0b0b0d] p-4 flex flex-col justify-between">
+          <div className="space-y-4">
+            <span className="font-mono text-[10px] tracking-widest text-zinc-550 uppercase block border-b border-white/5 pb-2">
+              Webhook Run Log Console
+            </span>
+            
+            <div className="space-y-3 font-mono text-[11px]">
+              <div className="p-3 bg-zinc-950 rounded border border-white/5 text-emerald-400 space-y-1.5">
+                <div>&gt;&gt;&gt; Sending event: forge_lead_enriched</div>
+                <div>&gt;&gt;&gt; POST to Zapier Webhook URL</div>
+                <div className="text-zinc-500">&lt;&lt;&lt; HTTP 200 OK (182ms)</div>
+                <div className="font-bold text-white flex items-center gap-1">✓ Connection Successful!</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
 /* ---------- registry ---------- */
 
-export const SCREENS: Record<string, { active: string; render: () => React.ReactNode }> = {
+export const SCREENS: Record<string, { active: string; variant?: "crm" | "none"; render: () => React.ReactNode }> = {
   dashboard: { active: "/dashboard", render: () => <DashboardScreen /> },
   inbox: { active: "/inbox", render: () => <InboxScreen /> },
   receptionist: { active: "/booking", render: () => <ReceptionistScreen /> },
   agents: { active: "/assistant", render: () => <AgentsScreen /> },
   workspaces: { active: "/dashboard", render: () => <WorkspacesScreen /> },
   workflow: { active: "/marketing", render: () => <WorkflowScreen /> },
+  forge_editor: { active: "/editor", variant: "none", render: () => <ForgeEditorScreen /> },
+  forge_deploy: { active: "/deploy", variant: "none", render: () => <ForgeDeployScreen /> },
+  forge_zapier: { active: "/zapier", variant: "none", render: () => <ForgeZapierScreen /> },
 };

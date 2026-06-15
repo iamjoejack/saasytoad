@@ -183,6 +183,7 @@ function GearIcon({ icon: Icon }: { icon: typeof Bot }) {
 const PRODUCTS = [
   {
     name: "SaaSyToadCRM",
+    status: "live",
     blurb:
       "The honest all-in-one CRM. Calls, texts, email, and DMs in one inbox, AI agents that follow up for you, and one flat price. AI included. No surprise bill.",
     features: [
@@ -197,6 +198,7 @@ const PRODUCTS = [
   },
   {
     name: "SaaSyToad Easy Clipper",
+    status: "live",
     blurb:
       "The honest AI video clipper. A team of AI agents turns long videos into short clips that keep the whole story, respect the pacing, and hold their framing.",
     features: [
@@ -208,6 +210,21 @@ const PRODUCTS = [
     ],
     primary: { href: "/easy-clipper", label: "Explore Easy Clipper" },
     secondary: { href: "/easy-clipper#how-it-works", label: "How it works" },
+  },
+  {
+    name: "SaaSyToad Forge",
+    status: "coming_soon",
+    blurb:
+      "The honest AI-powered visual code editor and workspace. Run secure microVM sandboxes, deploy edge websites with one-click, and connect workflow triggers directly to Zapier.",
+    features: [
+      "Visual-code hybrid editor",
+      "One-click public edge deployment",
+      "Secure Firecracker VM sandboxes",
+      "Direct Zapier webhook integrations",
+      "Desktop IDE command menu toolbar",
+    ],
+    primary: { href: "/forge", label: "Explore Forge" },
+    secondary: { href: "/forge#pricing", label: "See pricing" },
   },
 ];
 
@@ -227,9 +244,15 @@ function Products() {
               rivets
               className="metal-grain flex flex-col overflow-hidden p-8"
             >
-              <span className="engraved-label text-(--sp-patina)">
-                <span className="size-1.5 rounded-full bg-(--sp-patina)" />
-                Live now
+              <span className={cn(
+                "engraved-label",
+                p.status === "coming_soon" ? "text-(--sp-amber)" : "text-(--sp-patina)"
+              )}>
+                <span className={cn(
+                  "size-1.5 rounded-full",
+                  p.status === "coming_soon" ? "bg-(--sp-amber)" : "bg-(--sp-patina)"
+                )} />
+                {p.status === "coming_soon" ? "Coming soon / In Development" : "Live now"}
               </span>
               <h3 className="mt-3 text-2xl font-semibold text-foreground">
                 {p.name}
@@ -240,7 +263,10 @@ function Products() {
               <ul className="mt-6 grid gap-2.5 text-sm text-foreground-muted sm:grid-cols-2">
                 {p.features.map((f) => (
                   <li key={f} className="flex items-center gap-2.5">
-                    <Check className="size-4 shrink-0 text-(--sp-patina)" />
+                    <Check className={cn(
+                      "size-4 shrink-0",
+                      p.status === "coming_soon" ? "text-(--sp-amber)" : "text-(--sp-patina)"
+                    )} />
                     {f}
                   </li>
                 ))}

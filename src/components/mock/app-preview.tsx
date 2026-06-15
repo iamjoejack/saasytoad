@@ -34,7 +34,11 @@ export function AppPreview({
         <span className="size-2.5 rounded-full bg-[oklch(0.72_0.12_150)]" />
       </div>
       <ScaledFrame designWidth={1320} designHeight={820}>
-        <MockShell active={entry.active}>{entry.render()}</MockShell>
+        {entry.variant === "none" ? (
+          entry.render()
+        ) : (
+          <MockShell active={entry.active}>{entry.render()}</MockShell>
+        )}
       </ScaledFrame>
     </div>
   );

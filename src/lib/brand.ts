@@ -51,6 +51,24 @@ export const EASY_CLIPPER_TAGLINE =
   "The honest AI video clipper. Keeps the whole story, respects the pacing, holds the framing.";
 
 /**
+ * Where SaaSyToad Forge (the AI developer workspace) lives. Separate app and repo, so
+ * these are cross-site links. Set NEXT_PUBLIC_FORGE_URL per deploy to the Forge domain.
+ */
+export const FORGE_URL =
+  process.env.NEXT_PUBLIC_FORGE_URL?.replace(/\/+$/, "") ||
+  "https://saasytoadforge.vercel.app";
+
+/** Forge customer sign in. */
+export const FORGE_LOGIN_URL = `${FORGE_URL}/signin`;
+
+/** Forge owner and admin back office. */
+export const FORGE_ADMIN_URL = `${FORGE_URL}/admin/login`;
+
+/** Forge's one-line positioning. Used in marketing copy + metadata. */
+export const FORGE_TAGLINE =
+  "The honest AI developer workspace. A real coding agent, flat price, AI included, no surprise token bill.";
+
+/**
  * The parent company. SaaSyToadCRM is one of the products SaaSyToad builds
  * and runs. The company also does AI agentic apps, websites, and services.
  */
