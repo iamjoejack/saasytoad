@@ -161,7 +161,7 @@ export const BYO_AI_DISCOUNT = {
   claudeMonthlyUsd: null as number | null,
   /** TODO(owner): monthly $ off for connecting their own Higgsfield key. */
   higgsfieldMonthlyUsd: null as number | null,
-  note: "Already have a Claude or Higgsfield account? Connect it and pay less — your AI runs on your own account, and you're not capped by our included pool.",
+  note: "Already have a Claude or Higgsfield account? Connect it and pay less. Your AI runs on your own account, and you're not capped by our included pool.",
 };
 
 /** Format a whole-dollar amount as US currency, e.g. 1297 -> "$1,297". */
