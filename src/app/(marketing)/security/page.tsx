@@ -53,10 +53,10 @@ export default function SecurityPage() {
         <p>
           Found something? We want to hear about it. Email{" "}
           <a
-            href="mailto:security@saasytoad.com"
+            href="mailto:saasytoad@gmail.com"
             className="font-medium text-primary hover:underline"
           >
-            security@saasytoad.com
+            saasytoad@gmail.com
           </a>{" "}
           with the details and how to reproduce it. We'll get back to you, and
           we won't come after researchers acting in good faith.

@@ -80,10 +80,10 @@ export default function PrivacyPage() {
           where you live, you may have additional rights under laws like GDPR or
           CCPA. To exercise any of them, email{" "}
           <a
-            href="mailto:privacy@saasytoad.com"
+            href="mailto:saasytoad@gmail.com"
             className="font-medium text-primary hover:underline"
           >
-            privacy@saasytoad.com
+            saasytoad@gmail.com
           </a>
           .
         </p>
@@ -101,10 +101,10 @@ export default function PrivacyPage() {
         <p>
           Privacy questions or requests go to{" "}
           <a
-            href="mailto:privacy@saasytoad.com"
+            href="mailto:saasytoad@gmail.com"
             className="font-medium text-primary hover:underline"
           >
-            privacy@saasytoad.com
+            saasytoad@gmail.com
           </a>
           . [PLACEHOLDER: registered business address for formal notices.]
         </p>

@@ -11,13 +11,16 @@
 export const BRAND_ACCENT = "#598A33";
 
 /**
- * Where every "Book a demo" button points. Centralized so the owner swaps one
- * line when the real scheduling link is ready.
- *
- * TODO(owner): replace with the real SaaSyToad scheduling link (Calendly or the
- * in-app /book page) before launch. Placeholder for now.
+ * The one SaaSyToad inbox. Every brand-facing contact email and the contact
+ * form route here, so people always reach a real person. Single source of truth.
  */
-export const BOOK_A_DEMO_URL = "https://calendly.com/saasytoad/demo";
+export const CONTACT_EMAIL = "saasytoad@gmail.com";
+
+/**
+ * Where every "Book a demo" button points. Goes to the contact form with the
+ * reason preset to a demo. The form delivers to CONTACT_EMAIL via FormSubmit.
+ */
+export const BOOK_A_DEMO_URL = "/contact?reason=demo";
 
 /**
  * Where the CRM app lives. This marketing site is deployed separately from the
