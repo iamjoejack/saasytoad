@@ -11,7 +11,7 @@ export default function TermsPage() {
     <LegalPage
       title="Terms of Service"
       updated="June 2, 2026"
-      intro="Plain-English terms for using SaaSyToadCRM. Using the product means you agree to them. Questions? Email legal@saasytoad.com."
+      intro="Plain-English terms for using SaaSyToadCRM. Using the product means you agree to them. Questions? Email saasytoad@gmail.com."
     >
       <LegalSection heading="Who we are">
         <p>
@@ -98,10 +98,10 @@ export default function TermsPage() {
         <p>
           Questions about these terms? Email{" "}
           <a
-            href="mailto:legal@saasytoad.com"
+            href="mailto:saasytoad@gmail.com"
             className="font-medium text-primary hover:underline"
           >
-            legal@saasytoad.com
+            saasytoad@gmail.com
           </a>
           .
         </p>
