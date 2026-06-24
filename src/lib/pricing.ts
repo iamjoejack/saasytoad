@@ -57,8 +57,8 @@ export const PRICING_PLANS: PricingPlan[] = [
     tier: "STARTER",
     name: "Solo",
     blurb: "For the owner-operator doing it all themselves.",
-    monthlyUsd: 97,
-    annualMonthlyUsd: 79,
+    monthlyUsd: 197,
+    annualMonthlyUsd: 179,
     features: [
       "One workspace",
       "Unified inbox: calls, texts, email, DMs",
@@ -73,8 +73,8 @@ export const PRICING_PLANS: PricingPlan[] = [
     tier: "PRO",
     name: "Pro",
     blurb: "For a growing team with real call and message volume.",
-    monthlyUsd: 297,
-    annualMonthlyUsd: 247,
+    monthlyUsd: 397,
+    annualMonthlyUsd: 347,
     featured: true,
     features: [
       "Everything in Solo",
@@ -90,8 +90,8 @@ export const PRICING_PLANS: PricingPlan[] = [
     tier: "AGENCY",
     name: "Agency",
     blurb: "White-label. For agencies running a book of clients.",
-    monthlyUsd: 597,
-    annualMonthlyUsd: 497,
+    monthlyUsd: 697,
+    annualMonthlyUsd: 597,
     features: [
       "Everything in Pro",
       "Client workspaces, run them all from one login",
