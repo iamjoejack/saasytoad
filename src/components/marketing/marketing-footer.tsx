@@ -50,6 +50,7 @@ export function MarketingFooter() {
             <FooterLink href="/services">Services</FooterLink>
             <FooterLink href="/crew">The crew</FooterLink>
             <FooterLink href="/about">About</FooterLink>
+            <FooterLink href="/contact">Contact</FooterLink>
             <FooterLink href="/security">Security</FooterLink>
             <FooterExternal href={BOOK_A_DEMO_URL}>Book a demo</FooterExternal>
           </FooterColumn>
